@@ -29,5 +29,5 @@
   "main": "index.js",
   "repository": "https://github.com/AT-290690/brrr.git",
   "author": "AT-290629 <antony.k.tonev@gmail.com>",
-  "license": "y"
+  "license": "(MIT OR Apache-2.0)"
 }
