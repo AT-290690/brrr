@@ -1,0 +1,33 @@
+{
+  "type": "module",
+  "dependencies": {
+    "babel-jest": "^27.0.6",
+    "jest": "^27.0.6",
+    "nanobench": "^2.1.1"
+  },
+  "scripts": {
+    "test": "jest test test",
+    "bench": "node benchmark/benchmark.js",
+    "stress": "node benchmark/stresstest.js",
+    "sample": "node benchmark/sample.js",
+    "algo": "node benchmark/algo.js"
+  },
+  "jest": {
+    "preset": "./jest.json"
+  },
+  "prettier": {
+    "arrowParens": "avoid",
+    "semi": false,
+    "singleQuote": true
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.14.9"
+  },
+  "name": "brrr",
+  "version": "1.0.0",
+  "description": "Fast javascript array implementation",
+  "main": "index.js",
+  "repository": "https://github.com/AT-290690/brrr.git",
+  "author": "AT-290629 <antony.k.tonev@gmail.com>",
+  "license": "y"
+}
