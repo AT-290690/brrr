@@ -1,7 +1,7 @@
 # Brrr
 
 <p align="center">
-<img width="100" src="./playground/assets/images/logo.svg"/>
+<img width="50" src="./playground/assets/images/logo.svg"/>
 </p>
 
 ## Instant array operations
