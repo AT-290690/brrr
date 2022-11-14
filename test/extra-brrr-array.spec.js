@@ -473,4 +473,34 @@ describe('Brrr extra features', () => {
       )
     ).toBe(false)
   })
+  it('.shortCircuit should work', () => {
+    expect(
+      Brrr.of(1, 2, 3, 4)
+        .shortCircuitUnless(self => self.isEmpty())
+        .map(x => x ** 2)
+        .filter(x => x % 2)
+        .isShortCircuited()
+    ).toBe(true)
+
+    expect(
+      Brrr.of()
+        .shortCircuitIf(self => self.isEmpty())
+        .map(x => x ** 2)
+        .filter(x => x % 2)
+        .isShortCircuited()
+    ).toBe(true)
+
+    expect(
+      Brrr.of(1, 2, 3, 4)
+        .shortCircuitIf(self => self.isEmpty())
+        .map(x => x ** 2)
+        .filter(x => x % 2).items
+    ).toEqual([1, 9])
+    expect(
+      Brrr.of()
+        .shortCircuitIf(self => self.isEmpty())
+        .map(x => x ** 2)
+        .filter(x => x % 2).constructor.name
+    ).toBe('ShortCircuitedEntity')
+  })
 })

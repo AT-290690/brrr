@@ -118,6 +118,18 @@ export default class Brrr {
     return isEqual(this, other)
   }
 
+  isShortCircuited() {
+    return false
+  }
+
+  shortCircuitIf(predicate) {
+    return predicate(this) ? shortCircuitedEntity : this
+  }
+
+  shortCircuitUnless(predicate) {
+    return predicate(this) ? this : shortCircuitedEntity
+  }
+
   balance() {
     if (this.isBalanced()) return this
     const initial = [...this]
@@ -1141,3 +1153,16 @@ const isEqual = (a, b) => {
   // true if both NaN, false otherwise
   return a !== a && b !== b
 }
+
+class ShortCircuitedEntity {
+  isShortCircuited() {
+    return true
+  }
+}
+for (const method of Brrr.from([
+  ...Object.getOwnPropertyNames(Brrr),
+  ...Object.getOwnPropertyNames(Brrr.prototype),
+]).without('prototype', 'isShortCircuited', 'constructor').items) {
+  ShortCircuitedEntity.prototype[method] = () => shortCircuitedEntity
+}
+const shortCircuitedEntity = Object.freeze(new ShortCircuitedEntity())

@@ -101,6 +101,9 @@ merge(..arrays)
 getInWrap(index)
 setInWrap(index, value)
 setInBounds(index, value)
+isShortCircuited()
+shortCircuitIf(predicate)
+shortCircuitUnless(predicate)
 `,
     content: [
       'All existing methods',
