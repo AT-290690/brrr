@@ -536,6 +536,29 @@ return arr.isCompact()`,
       `(boolean): Returns true if the array is sparce, else false.`,
     ],
   },
+  isEqual: {
+    source: `const a = Brrr.of(1, [1, 2, 3], {
+      x: 1,
+      y: Brrr.of(1, 2, { a: [1, 2, 3] }),
+})
+const b = Brrr.of(1, [1, 2, 3], {
+  x: 1,
+  y: Brrr.of(1, 2, { a: [1, 2, 3] }),
+})
+return a.isEqual(b)
+`,
+    content: [
+      `Checks if the array is equal to a given one.`,
+      `Arrays are considered equal if:`,
+      `- All of their values and references are exactly the same.`,
+      `- The order of their items is exactly the same.`,
+      `- The above is true for all items of the array recursively.`,
+      `Arguments`,
+      `[Array] The provided array to compare againts`,
+      `Returns`,
+      `(boolean): Returns true if the two arrays are the same, else false.`,
+    ],
+  },
 }
 
 export const createButton = label => {

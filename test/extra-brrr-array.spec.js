@@ -424,4 +424,53 @@ describe('Brrr extra features', () => {
     expect(Brrr.of(1, 2, 3, undefined, 4).isCompact()).toBe(false)
     expect(Brrr.of(1, 2, 3, undefined, 4).isSparce()).toBe(true)
   })
+  it('.isEqual should work', () => {
+    expect(Brrr.of(1, 2, 3, 4).isEqual(Brrr.of(1, 2, 3, 4))).toBe(true)
+    expect(Brrr.of(1, 2, 3, 4).isEqual(Brrr.of(1, 2, 5, 4))).toBe(false)
+    expect(Brrr.of(1, 2, 3, 4).isEqual(Brrr.of(1, 2, 3, 4, 5))).toBe(false)
+    expect(
+      Brrr.of(1, [1, 2, 3], {
+        x: 1,
+        y: Brrr.of(1, 2, { a: [1, 2, 3] }),
+      }).isEqual(
+        Brrr.of(1, [1, 2, 3], {
+          x: 1,
+          y: Brrr.of(1, 2, { a: [1, 2, 3] }),
+        })
+      )
+    ).toBe(true)
+    expect(
+      Brrr.of(1, [1, 2, 3], {
+        x: 1,
+        y: Brrr.of(1, 2, { a: [1, 2, 3] }),
+      }).isEqual(
+        Brrr.of(1, [1, 2, 3], {
+          m: 1,
+          y: Brrr.of(1, 2, { a: [1, 2, 3] }),
+        })
+      )
+    ).toBe(false)
+    expect(
+      Brrr.of(1, [1, 2, 3], {
+        x: 1,
+        y: Brrr.of(1, 2, { a: [2, 2, 3] }),
+      }).isEqual(
+        Brrr.of(1, [1, 2, 3], {
+          x: 1,
+          y: Brrr.of(1, 2, { a: [1, 2, 3] }),
+        })
+      )
+    ).toBe(false)
+    expect(
+      Brrr.of(1, [1, 2, 3], 3, {
+        x: 1,
+        y: Brrr.of(1, 2, { a: [1, 2, 3] }),
+      }).isEqual(
+        Brrr.of(1, [1, 2, 3], {
+          x: 1,
+          y: Brrr.of(1, 2, { a: [1, 2, 3] }),
+        })
+      )
+    ).toBe(false)
+  })
 })
