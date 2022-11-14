@@ -104,6 +104,7 @@ setInBounds(index, value)
 isShortCircuited()
 shortCircuitIf(predicate)
 shortCircuitUnless(predicate)
+toPromise()
 `,
     content: [
       'All existing methods',
@@ -560,6 +561,26 @@ return a.isEqual(b)
       `[Array] The provided array to compare againts`,
       `Returns`,
       `(boolean): Returns true if the two arrays are the same, else false.`,
+    ],
+  },
+  toPromise: {
+    source: `return (await Brrr
+.of(1, 2, 3, 4, null)
+.union(Brrr.of(1, 2, 3, null))
+.compact()
+.map(todo => 
+  fetch('https://jsonplaceholder.typicode.com/todos/' + todo)
+  .then(request => request.json()))
+.toPromise())
+.map(todo => todo.title)
+.items`,
+    content: [
+      `Convert the array to a promise.`,
+      `Resolve a promise in each item.`,
+      `Arguments`,
+      `[void]`,
+      `Returns`,
+      `(Promise): Returns an array of all an array (Promise.all result)`,
     ],
   },
 }

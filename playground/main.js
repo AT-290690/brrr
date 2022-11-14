@@ -20,13 +20,14 @@ const printErrors = errors => {
   consoleElement.classList.add('error_line')
   consoleElement.value = errors
 }
-const run = () => {
+const AsyncFunction = async function () {}.constructor
+const run = async () => {
   consoleElement.classList.add('info_line')
   consoleElement.classList.remove('error_line')
   consoleElement.value = ''
   // popupContainer.style.display = 'none'
   try {
-    const out = new Function(`${editor.getValue().trim()}`)()
+    const out = await new AsyncFunction(`${editor.getValue().trim()}`)()
     if (out !== undefined) {
       Brrr.isBrrr(out) ? print(out.toObject(true)) : print(out)
     } else {

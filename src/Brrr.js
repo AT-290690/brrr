@@ -587,6 +587,10 @@ export default class Brrr {
     return deep ? toObjectDeep(this) : this.reflection
   }
 
+  async toPromise() {
+    return Brrr.from(await Promise.all(this.items))
+  }
+
   append(item) {
     this.#addToRight(item)
     return this
