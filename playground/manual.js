@@ -477,6 +477,22 @@ return arr.items`,
       `Use .removeFrom(index, amount).addAt(index, ...values) instead`,
     ],
   },
+  rotate: {
+    source: `const arr = Brrr.of(1, 2, 3, 4, 5, 6, 7, 8 ,9)
+return arr.rotate(2, -3).items`,
+    content: [
+      `Rotates the array n amout of time in given direction.`,
+      `Rotation of an array is when element is removed from one end and inserted to the other end`,
+      '[1, 2, 3] => rotate to the left => [2, 3, 1]',
+      '[2, 3, 1] => rotate to the left => [3, 1, 2]',
+      '[3, 1, 2] => rotate to the left => [1, 2, 3]',
+      `Arguments`,
+      `[rotations=0] (Number): The number of rotations.`,
+      `[directions=1] (Number): the direction of rotation (-1=left, 1=right).`,
+      `Returns`,
+      `(Array): Returns the rotated array.`,
+    ],
+  },
   every: {
     source: `const arr = Brrr.of(1, 3, 5)
 return arr.every(x => x % 2 === 1)`,
@@ -581,6 +597,47 @@ return a.isEqual(b)
       `[void]`,
       `Returns`,
       `(Promise): Returns an array of all an array (Promise.all result)`,
+    ],
+  },
+  items: {
+    source: `return Brrr
+    .of(1, 2, 3, 4).items`,
+    content: [
+      `Convert the array to a regular array.`,
+      `Arguments`,
+      `Getter`,
+      `Returns`,
+      `(Regular Array): Returns a regular array representation of the array`,
+    ],
+  },
+  isShortCircuited: {
+    source: `return Brrr.of(1, 2, 3).isShortCircuited()`,
+    content: [
+      `Check if the array has short circuited.`,
+      `Short circuit is when a .shortCircuitIf of .shortCircuitUnless returned true somewhere on the chain`,
+      `if .isShortCircuited returns true it means that the array is disabled`,
+      `Arguments`,
+      `[void]`,
+      `Returns`,
+      `(boolean): true if the array did short circuit and false otherwise`,
+    ],
+  },
+  shortCircuitIf: {
+    source: `return Brrr.of()
+.shortCircuitIf(self => self.isEmpty())
+.map(x => x ** 2)
+.filter(x => x % 2)
+.isShortCircuited()`,
+    content: [
+      `Stop iterating the array if the predicate function returns true`,
+      `The array is replaced by a Shadow entity if the functions returns true`,
+      `The shadow is a disabled version of the array.`,
+      `It has all of the methods of the array all of them return the shadow.`,
+      `isShortCircuited called on the shadow will return true.`,
+      `Arguments`,
+      `[predicate] (Function): The function invoked on the array (self) => self.length > 10`,
+      `Returns`,
+      `(Shadow | Array): returns a Shadow or keeps the same array`,
     ],
   },
 }
