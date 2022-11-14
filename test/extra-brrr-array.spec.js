@@ -503,4 +503,14 @@ describe('Brrr extra features', () => {
         .filter(x => x % 2).constructor.name
     ).toBe('Shadow')
   })
+
+  it(`.do should work`, () => {
+    expect(Brrr.of(1, 2, 3, 4).do(array => array.append(10)).items).toEqual([
+      1, 2, 3, 4, 10,
+    ])
+    expect(Brrr.of(1, 2, 3, 4).do(array => array.reverse()).items).toEqual([
+      4, 3, 2, 1,
+    ])
+    expect(Brrr.of(1, 2, 3, 4).do(array => array.clear()).items).toEqual([])
+  })
 })

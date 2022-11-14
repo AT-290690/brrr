@@ -105,6 +105,7 @@ isShortCircuited()
 shortCircuitIf(predicate)
 shortCircuitUnless(predicate)
 toPromise()
+do(function)
 `,
     content: [
       'All existing methods',
@@ -546,7 +547,7 @@ return arr.isCompact()`,
   },
   isSparce: {
     source: `const arr = Brrr.of(1, undefined, 2, undefined,  3)
-    return arr.isSparce()`,
+return arr.isSparce()`,
     content: [
       `Checks if the array is sparce.`,
       `Arrays are considered sparce if they contain empty values (null/undefined).`,

@@ -102,6 +102,11 @@ export default class Brrr {
     for (let i = 0, len = this.length; i < len; ++i) yield this.get(i)
   }
 
+  do(predicate) {
+    predicate(this)
+    return this
+  }
+
   isBalanced() {
     return this.offsetRight + this.offsetLeft === 0
   }
