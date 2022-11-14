@@ -501,6 +501,6 @@ describe('Brrr extra features', () => {
         .shortCircuitIf(self => self.isEmpty())
         .map(x => x ** 2)
         .filter(x => x % 2).constructor.name
-    ).toBe('ShortCircuitedEntity')
+    ).toBe('Shadow')
   })
 })

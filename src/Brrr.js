@@ -123,11 +123,11 @@ export default class Brrr {
   }
 
   shortCircuitIf(predicate) {
-    return predicate(this) ? shortCircuitedEntity : this
+    return predicate(this) ? shadow : this
   }
 
   shortCircuitUnless(predicate) {
-    return predicate(this) ? this : shortCircuitedEntity
+    return predicate(this) ? this : shadow
   }
 
   balance() {
@@ -1158,7 +1158,7 @@ const isEqual = (a, b) => {
   return a !== a && b !== b
 }
 
-class ShortCircuitedEntity {
+class Shadow {
   isShortCircuited() {
     return true
   }
@@ -1167,6 +1167,6 @@ for (const method of Brrr.from([
   ...Object.getOwnPropertyNames(Brrr),
   ...Object.getOwnPropertyNames(Brrr.prototype),
 ]).without('prototype', 'isShortCircuited', 'constructor').items) {
-  ShortCircuitedEntity.prototype[method] = () => shortCircuitedEntity
+  Shadow.prototype[method] = () => shadow
 }
-const shortCircuitedEntity = Object.freeze(new ShortCircuitedEntity())
+const shadow = Object.freeze(new Shadow())
