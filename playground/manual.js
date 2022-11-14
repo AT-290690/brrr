@@ -521,7 +521,7 @@ return arr.some(x => x % 2 === 0)`,
   },
   isEmpty: {
     source: `const arr = Brrr.of(1, 2, 3)
-arr.removeFrom(0)
+arr.removeFrom(0, arr.length)
 return arr.isEmpty()`,
     content: [
       `Checks if the array is empty.`,
