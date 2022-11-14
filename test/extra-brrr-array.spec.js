@@ -60,7 +60,7 @@ describe('Brrr extra features', () => {
   it('Set methods should work', () => {
     const a1 = new Brrr().with(1, 2, 3, 4)
     const b1 = new Brrr().with(8, 9, 3, 2, 4)
-    expect(a1.symetricDifference(b1).items).toEqual([8, 9, 1])
+    expect(a1.xor(b1).items).toEqual([8, 9, 1])
 
     const a2 = new Brrr().with(1, 2, 3, 4)
     const b2 = new Brrr().with(8, 9, 3, 2, 4)
@@ -80,9 +80,7 @@ describe('Brrr extra features', () => {
 
     const a6 = new Brrr().with(1, 2, 3, 4, 5, 8)
     const b6 = new Brrr().with(8, 9, 3, 2, 4)
-    expect(a6.unique().union(b6.unique()).symetricDifference(b6).items).toEqual(
-      [1, 5]
-    )
+    expect(a6.unique().union(b6.unique()).xor(b6).items).toEqual([1, 5])
   })
 
   it('.swap should work', () => {
@@ -419,5 +417,11 @@ describe('Brrr extra features', () => {
     expect(
       Brrr.of(1, 2, 3, 4).merge(Brrr.of(5, 6, 7, 8), Brrr.of(9, 10)).items
     ).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+  })
+  it('.isCompact and .isSparce should work', () => {
+    expect(Brrr.of(1, 2, 3, 4).isCompact()).toBe(true)
+    expect(Brrr.of(1, 2, 3, 4).isSparce()).toBe(false)
+    expect(Brrr.of(1, 2, 3, undefined, 4).isCompact()).toBe(false)
+    expect(Brrr.of(1, 2, 3, undefined, 4).isSparce()).toBe(true)
   })
 })

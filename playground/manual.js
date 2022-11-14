@@ -80,7 +80,7 @@ rotate(n = 1, direction = 1)
 without(...excludes)
 compact()
 union(b)
-symetricDifference(b)
+xor(b)
 intersection(b)
 difference(b)
 partition(groups = 1)
@@ -94,6 +94,8 @@ scan(callback, dir = 1)
 isEmpty() 
 isInBounds(index) 
 isSorted(order = 'asc') 
+isCompact()
+isSparce()
 search(target, identity = Identity, greather)
 merge(..arrays)
 getInWrap(index)
@@ -383,10 +385,10 @@ return a.difference(b).items`,
       `(Array): Returns the new array of filtered values.`,
     ],
   },
-  symetricDifference: {
+  xor: {
     source: `const a = Brrr.of(1, 3, 5)
 const b = Brrr.of(1, 2, 4, 6, 7, 8, 9)
-return a.symetricDifference(b).items`,
+return a.xor(b).items`,
     content: [
       `Creates an array of array values that are the symetric difference of 2 Sets.`,
       `Also known as the disjunctive union, is the set of elements which are in either of the sets, but not in their intersection`,
@@ -495,6 +497,43 @@ return arr.some(x => x % 2 === 0)`,
       `[predicate=_.identity] (Function): The function invoked per iteration.`,
       `Returns`,
       `(boolean): Returns true if any element passes the predicate check, else false.`,
+    ],
+  },
+  isEmpty: {
+    source: `const arr = Brrr.of(1, 2, 3)
+arr.removeFrom(0)
+return arr.isEmpty()`,
+    content: [
+      `Checks if the array is empty.`,
+      `Arrays are considered empty if they have a length of 0.`,
+      `Arguments`,
+      `[void]`,
+      `Returns`,
+      `(boolean): Returns true if the array is empty, else false.`,
+    ],
+  },
+  isCompact: {
+    source: `const arr = Brrr.of(1, 2, 3)
+return arr.isCompact()`,
+    content: [
+      `Checks if the array is compact.`,
+      `Arrays are considered compact if they don't contain any empty values (null/undefined).`,
+      `Arguments`,
+      `[void]`,
+      `Returns`,
+      `(boolean): Returns true if the array is compact, else false.`,
+    ],
+  },
+  isSparce: {
+    source: `const arr = Brrr.of(1, undefined, 2, undefined,  3)
+    return arr.isSparce()`,
+    content: [
+      `Checks if the array is sparce.`,
+      `Arrays are considered sparce if they contain empty values (null/undefined).`,
+      `Arguments`,
+      `[void]`,
+      `Returns`,
+      `(boolean): Returns true if the array is sparce, else false.`,
     ],
   },
 }

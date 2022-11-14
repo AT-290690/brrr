@@ -106,6 +106,14 @@ export default class Brrr {
     return this.offsetRight + this.offsetLeft === 0
   }
 
+  isCompact() {
+    return this.every(x => x != undefined)
+  }
+
+  isSparce() {
+    return this.some(x => x == undefined)
+  }
+
   balance() {
     if (this.isBalanced()) return this
     const initial = [...this]
@@ -697,7 +705,7 @@ export default class Brrr {
     return out
   }
 
-  symetricDifference(b) {
+  xor(b) {
     const a = this
     const out = new Brrr()
     const A = new Set(a.toArray())
