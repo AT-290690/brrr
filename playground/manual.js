@@ -641,6 +641,25 @@ return a.isEqual(b)
       `(Shadow | Array): returns a Shadow or keeps the same array`,
     ],
   },
+  matrix: {
+    source: `return Brrr.matrix(5, 4, 2)`,
+    content: [
+      `Create a matrix of n by k by ...dimensions`,
+      `Arguments`,
+      `[...dimension] (Number): The number of dimensions`,
+      `Returns`,
+      `(Array) retunrs a matrix of the given dimensions`,
+    ],
+  },
+  shape: {
+    source: `return Brrr.matrix(5, 4, 2).shape`,
+    content: [
+      `Shows the number of dimensions in a matrix`,
+      `Getter`,
+      `Returns`,
+      `(Array) retuns the shape of the matrix`,
+    ],
+  },
 }
 
 export const createButton = label => {
