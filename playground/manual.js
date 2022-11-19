@@ -243,7 +243,7 @@ return arr.group((item) => (item % 2 == 0 ? "even" : "odd"))
     content: [
       `Group the collection`,
       `Arguments`,
-      `[[iteratee] (Function): The function invoked per iteration.`,
+      `[iteratee] (Function): The function invoked per iteration.`,
       `Returns`,
       `(Object): The Object/Map with groups as keys.`,
     ],
@@ -670,6 +670,47 @@ return arr.length`,
       `[void]`,
       `Returns`,
       `(Array) The empty array`,
+    ],
+  },
+  isBrrr: {
+    source: `const arr = Brrr.of(5, 4, 2)
+return Brrr.isBrrr(arr)`,
+    content: [
+      `A static method of Brrr`,
+      `Checks if the array is an instance of Brrr`,
+      `Arguments`,
+      `[value] (Array) The value we check`,
+      `Returns`,
+      `(Boolean) true if the value an instance of Brrr, false if not`,
+    ],
+  },
+  balance: {
+    source: `const arr = Brrr.of(5, 4, 2)
+arr.append(1).append(1).append(1)
+arr.balance()
+return arr.isBalanced()`,
+    content: [
+      `Balances the array.`,
+      `An array is considered balanced if:`,
+      `- left and right offsets are equal to each other`,
+      `Arguments`,
+      `[void] `,
+      `Returns`,
+      `(Array) the balanced array`,
+    ],
+  },
+  isBalanced: {
+    source: `const arr = Brrr.of(5, 4, 2)
+arr.append(1).prepend(1)
+return arr.isBalanced()`,
+    content: [
+      `Checks if the array is balanced`,
+      `An array is considered balanced if:`,
+      `- left and right offsets are equal to each other`,
+      `Arguments`,
+      `[void] `,
+      `Returns`,
+      `(Boolean) true if the array is balanced, false otherwise`,
     ],
   },
 }
