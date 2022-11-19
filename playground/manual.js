@@ -480,7 +480,7 @@ return arr.items`,
   },
   rotate: {
     source: `const arr = Brrr.of(1, 2, 3, 4, 5, 6, 7, 8 ,9)
-return arr.rotate(2, -3).items`,
+return arr.rotate(2, -1).items`,
     content: [
       `Rotates the array n amout of time in given direction.`,
       `Rotation of an array is when element is removed from one end and inserted to the other end`,
@@ -658,6 +658,18 @@ return a.isEqual(b)
       `Getter`,
       `Returns`,
       `(Array) retuns the shape of the matrix`,
+    ],
+  },
+  clear: {
+    source: `const arr = Brrr.matrix(5, 4, 2)
+arr.clear()
+return arr.length`,
+    content: [
+      `Removes all elements from the array`,
+      `Arguments`,
+      `[void]`,
+      `Returns`,
+      `(Array) The empty array`,
     ],
   },
 }
