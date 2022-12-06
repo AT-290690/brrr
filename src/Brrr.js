@@ -778,6 +778,36 @@ export default class Brrr {
     return res
   }
 
+  window(size = this.length) {
+    const len = this.length
+    const ref = this
+    const gen = function* (chunk = ref.slice(0, size)) {
+      for (let i = size; i < len; ++i) {
+        yield chunk
+        if (chunk.length >= size) chunk.tail()
+        chunk.append(ref.get(i))
+      }
+    }
+    return {
+      generator: gen,
+      iterable: () => {
+        const generator = gen()
+        let out = []
+        for (let i = 0; i < this.length - size; ++i) {
+          const item = generator.next().value
+          out.push(item.copy())
+        }
+        return Brrr.from(out)
+      },
+      position: index => {
+        if (index === 0) return new Brrr()
+        const generator = gen(ref.slice(0, size))
+        let out
+        for (let i = 0; i < index; ++i) out = generator.next()
+        return out?.value ?? new Brrr()
+      },
+    }
+  }
   unique() {
     const set = new Set()
     return Brrr.from(

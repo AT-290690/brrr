@@ -513,4 +513,23 @@ describe('Brrr extra features', () => {
     ])
     expect(Brrr.of(1, 2, 3, 4).do(array => array.clear()).items).toEqual([])
   })
+
+  it(`.window  should work`, () => {
+    const win = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    const a = Brrr.from(win).window(3)
+    expect(a.position(1).items).toEqual([1, 2, 3])
+    expect(a.position(2).items).toEqual([2, 3, 4])
+    expect(a.position(3).items).toEqual([3, 4, 5])
+
+    const b = Brrr.from(win).window(5)
+    expect(b.iterable().items).toEqual([
+      [1, 2, 3, 4, 5],
+      [2, 3, 4, 5, 6],
+      [3, 4, 5, 6, 7],
+      [4, 5, 6, 7, 8],
+      [5, 6, 7, 8, 9],
+      [6, 7, 8, 9, 10],
+      [7, 8, 9, 10, 11],
+    ])
+  })
 })
