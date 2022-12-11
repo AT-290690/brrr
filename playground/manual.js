@@ -2,8 +2,7 @@ import { editor } from './main.js'
 
 const buttonContainer = document.getElementById('buttons')
 const contentContainer = document.getElementById('content')
-const searchInput = document.getElementById('search')
-
+export const consoleElement = document.getElementById('console')
 const snippets = {
   List: {
     source: `get offsetLeft()
@@ -130,6 +129,19 @@ return arr.map((x, i, arr) => x * i * 2).items`,
       `[iteratee] (Function): The function invoked per iteration.`,
       `Returns`,
       `(Array): The new mapped array.`,
+    ],
+  },
+  scan: {
+    source: `const arr = Brrr.of(1, 2, 3, 4, 5)
+const box = new Brrr()
+return arr.scan((x, i, arr) => box.append(x * 2 + i), -1).items`,
+    content: [
+      `Iterate the values of a collection by running each element in collection thru iteratee. The iteratee is invoked with three arguments: (value, index, collection).`,
+      `Arguments`,
+      `[iteratee] (Function): The function invoked per iteration.`,
+      `[directions=1] (Number): the direction of rotation (-1=left, 1=right).`,
+      `Returns`,
+      `(Array): The array that was iterated`,
     ],
   },
   filter: {
@@ -455,6 +467,19 @@ return arr.reverse().items`,
       `(Array): Returns array.`,
     ],
   },
+  copy: {
+    source: `const arr = Brrr.of(1, 2, 3, 4, 5, 6, 7, 8 ,9)
+arr.copy().reverse()
+return arr
+`,
+    content: [
+      `Creates a copy of array`,
+      `Arguments`,
+      `[void]`,
+      `Returns`,
+      `(Array): Returns the new copy of array.`,
+    ],
+  },
   slice: {
     source: `const arr = Brrr.of(1, 2, 3, 4, 5, 6, 7, 8 ,9)
 return arr.slice(2, 4).items`,
@@ -740,7 +765,7 @@ export const createButton = label => {
 }
 const inclusions = Object.keys(snippets)
 const defaults = ['Brrr', 'List']
-searchInput.addEventListener('input', e => {
+consoleElement.addEventListener('input', e => {
   if (e.target.value.trim() === '') {
     buttonContainer.innerHTML = ''
     return defaults.forEach(createButton)

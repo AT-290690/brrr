@@ -1,10 +1,10 @@
 import { CodeMirror } from './libs/editor/editor.bundle.js'
 import Brrr from '../src/Brrr.js'
-import { createButton } from './manual.js'
+import { consoleElement, createButton } from './manual.js'
 
 const app = document.getElementById('app')
 const mainContainer = document.getElementById('editor-container')
-const consoleElement = document.getElementById('console')
+
 app.style.height = window.innerHeight
 globalThis.Brrr = Brrr
 export const editor = CodeMirror(mainContainer, {})
