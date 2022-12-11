@@ -23,43 +23,24 @@ html {
   -webkit-font-smoothing: antialiased;
 }
 body {
-  background: #171718;
-  /* background: linear-gradient(90deg, #fc466b 0%, #3f5efb 100%);
-  background-image: url(./assets/images/tech_neoncircuitboard_857021704_medium_lc5h05.jpeg);
-  background-size: cover; */
+  background: #0d0d0d;
   overflow: hidden;
-  /* background: linear-gradient(90deg, #fc466b 0%, #3f5efb 100%); */
-  /* background-image: url(https://rare-gallery.com/thumbs/356110-4k-wallpaper.jpg);
-  background-repeat: no-repeat;
-  background-size: cover; */
-  /* height: 100vh; */
-  /* background-position: center; */
-  /* padding: 8px; */
 }
 
 .app {
   background-color: var(--theme-bg-color);
-  /* border: none; */
   border: 1px solid var(--border-color);
   overflow: hidden;
   border-radius: 14px;
-  /* backdrop-filter: blur(12pt); */
-  /* -webkit-backdrop-filter: blur(12pt); */
   font-size: 15px;
   font-weight: 500;
-  /* box-shadow: 0 0 15px 1px var(--border-color); */
 }
 
 button {
-  /* border: none; */
-  /* box-shadow: 0 0 15px 1px var(--border-color2); */
   cursor: pointer;
   background-color: var(--theme-bg-color);
   border-radius: 14px;
   border: 1px solid var(--border);
-
-  /* backdrop-filter: blur(20px); */
-  /* -webkit-backdrop-filter: blur(20px); */
   font-size: 15px;
   font-weight: 500;
   color: var(--theme-color);
@@ -72,8 +53,6 @@ button:active {
 .header {
   display: flex;
   align-items: center;
-  /* border-bottom: 1px solid var(--border-color); */
-  /* padding: 0px 10px; */
 }
 p {
   color: var(--theme-color);
@@ -96,7 +75,6 @@ p {
   --color-thirdly: #f8f8f0;
   --color-fourtly: #75ff91;
   --color-fiftly: #2eff85;
-  /* --gutters-border: 1px solid transparent; */
   --border-width: 1px;
   --error: #e93838;
   --warning: #ffed2b;
@@ -146,7 +124,6 @@ textarea {
 
 #console:focus {
   color: var(--icons);
-  /* background-color: var(--background-primary); */
 }
 #console {
   border: none;
@@ -155,8 +132,6 @@ textarea {
   background-color: transparent;
   outline: none;
   resize: none;
-  /* position: fixed; */
-  /* bottom: 0; */
 }
 .success_line,
 .error_line,
@@ -182,13 +157,9 @@ textarea {
   border: none;
   border-top: 1px solid var(--border-color2);
   border-bottom: 1px solid var(--border-color);
-
-  /* border: solid 1px var(--border); */
 }
 .cm-editor {
   border: none;
-  /* border-bottom: 1px solid var(--border);
-  border-bottom: none; */
 }
 .header-button {
   cursor: pointer;
@@ -253,7 +224,6 @@ p {
   user-select: none;
 }
 ::placeholder {
-  /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: rgb(250, 242, 219);
   opacity: 0.7; /* Firefox */
 }
@@ -261,7 +231,6 @@ p {
   overflow-y: scroll;
   border: none;
   border-top: 1px solid #ffffff2b;
-  /* border-bottom: 1px solid var(--border-color); */
   padding: 2px;
   height: 140px;
 }

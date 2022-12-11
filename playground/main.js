@@ -25,7 +25,6 @@ const run = async () => {
   consoleElement.classList.add('info_line')
   consoleElement.classList.remove('error_line')
   consoleElement.value = ''
-  // popupContainer.style.display = 'none'
   try {
     const out = await new AsyncFunction(`${editor.getValue().trim()}`)()
     if (out !== undefined) {

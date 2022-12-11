@@ -215,15 +215,39 @@ return arr.get(2)`,
       `(*) The item of the array at the given index`,
     ],
   },
-  at: {
+  get: {
     source: `const arr = Brrr.of(1, 2, 3, 4, 5)
-return arr.at(-1)`,
+return arr.get(2)`,
     content: [
       `Access element of the array`,
       `Arguments`,
       `[index] (Number): index of the array`,
       `Returns`,
-      `(*): The item of the array at the given index`,
+      `(*) The item of the array at the given index`,
+    ],
+  },
+  set: {
+    source: `const arr = Brrr.of(1, 2, 3, 4, 5)
+return arr.set(2, 29)`,
+    content: [
+      `Set element of the array at given index`,
+      `Arguments`,
+      `[index] (Number): index of the array`,
+      `[item] (*): item to set`,
+      `Returns`,
+      `(Array) Reference to the array`,
+    ],
+  },
+  swap: {
+    source: `const arr = Brrr.of(1, 2, 3, 4, 5)
+return arr.swap(0, 3)`,
+    content: [
+      `Swap two element of the array at given indexes`,
+      `Arguments`,
+      `[index1] (Number): index of the array`,
+      `[index2] (Number): index of the array`,
+      `Returns`,
+      `(Array) Reference to the array`,
     ],
   },
   first: {
