@@ -782,7 +782,7 @@ export default class Brrr {
     const len = this.length
     const ref = this
     const gen = function* (chunk = ref.slice(0, size)) {
-      for (let i = size; i < len; ++i) {
+      for (let i = size; i < len * len; ++i) {
         yield chunk
         if (chunk.length >= size) chunk.tail()
         chunk.append(ref.get(i))
