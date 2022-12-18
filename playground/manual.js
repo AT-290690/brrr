@@ -426,6 +426,19 @@ return a.difference(b).items`,
       `(Array): Returns the new array of filtered values.`,
     ],
   },
+  do: {
+    source: `return Brrr.of(1, 3, 5)
+.do(arr => arr.append(arr.reduce((a, b) => a + b, 0)))
+.items`,
+    content: [
+      `A function that passes the array and does something to it.`,
+      `Returning the array at the end.`,
+      `Arguments`,
+      `[array] (Array): The array refference`,
+      `Returns`,
+      `(Array): Returns the same array.`,
+    ],
+  },
   xor: {
     source: `const a = Brrr.of(1, 3, 5)
 const b = Brrr.of(1, 2, 4, 6, 7, 8, 9)
