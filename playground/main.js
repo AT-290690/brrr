@@ -10,9 +10,7 @@ globalThis.Brrr = Brrr
 export const editor = CodeMirror(mainContainer, {})
 editor.changeFontSize('15px')
 const print = function (...values) {
-  values.forEach(
-    x => (consoleElement.value += `${JSON.stringify(x) ?? undefined}`)
-  )
+  values.forEach(x => (consoleElement.value += JSON.stringify(x)))
   return values
 }
 const printErrors = errors => {

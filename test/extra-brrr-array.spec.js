@@ -532,4 +532,17 @@ describe('Brrr extra features', () => {
       [7, 8, 9, 10, 11],
     ])
   })
+
+  it(`.imbalance should work`, () => {
+    const a = Brrr.of(1, 2, 3, 4).imbalance(-1).reflection
+    const b = Brrr.of(1, 2, 3, 4).imbalance(1).reflection
+    expect(a.left.length).toBe(5)
+    expect(a.right.length).toBe(0)
+    expect(b.left.length).toBe(1)
+    expect(b.right.length).toBe(4)
+    expect(a.left.slice(1)).toEqual([4, 3, 2, 1])
+    expect(a.right).toEqual([])
+    expect(b.left.slice(1)).toEqual([])
+    expect(b.right).toEqual([1, 2, 3, 4])
+  })
 })

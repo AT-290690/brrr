@@ -144,6 +144,19 @@ export default class Brrr {
     for (let i = half; i < initial.length; ++i) this.#addToRight(initial[i])
     return this
   }
+
+  imbalance(dir = 1) {
+    const copy = this.copy()
+    this.clear()
+    if (dir === 1)
+      for (let i = 0, len = copy.length; i < len; ++i)
+        this.#addToRight(copy.chop())
+    else
+      for (let i = 0, len = copy.length; i < len; ++i)
+        this.#addToLeft(copy.cut())
+    return this
+  }
+
   /**
    * negativeZeroSymbol is the first left index
    * It is never used.
@@ -808,6 +821,7 @@ export default class Brrr {
       },
     }
   }
+
   unique() {
     const set = new Set()
     return Brrr.from(
