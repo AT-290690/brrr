@@ -806,7 +806,7 @@ export default class Brrr {
       iterable: () => {
         const generator = gen()
         let out = []
-        for (let i = 0; i < this.length - size; ++i) {
+        for (let i = 0; i <= this.length - size; ++i) {
           const item = generator.next().value
           out.push(item.copy())
         }
