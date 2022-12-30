@@ -295,17 +295,33 @@ describe('Brrr mimic Array', () => {
     const binArr2 = Brrr.from(arr2)
     expect(binArr2.reverse().items).toEqual(arr2.reverse())
     expect(binArr2.reverse().reverse().items).toEqual(arr2.reverse().reverse())
-    expect(arr2.length).toEqual(binArr2.length)
+    expect(binArr2.length).toEqual(arr2.length)
   })
 
   it('.slice should create a new collection from the same range', () => {
     const arr = [4, 1, 1, 2, 3, 8, 7]
     const binArr = Brrr.from(arr)
-    expect(arr.slice(1)).toEqual(binArr.slice(1).items)
-    expect(arr.slice(1, 2)).toEqual(binArr.slice(1, 2).items)
-    expect(arr.slice(3)).toEqual(binArr.slice(3).items)
-    expect(arr.slice(2, 5)).toEqual(binArr.slice(2, 5).items)
-    expect(arr.slice(4, 5)).toEqual(binArr.slice(4, 5).items)
+    expect(binArr.slice(1).items).toEqual(arr.slice(1))
+    expect(binArr.slice(1, 2).items).toEqual(arr.slice(1, 2))
+    expect(binArr.slice(3).items).toEqual(arr.slice(3))
+    expect(binArr.slice(2, 5).items).toEqual(arr.slice(2, 5))
+    expect(binArr.slice(4, 5).items).toEqual(arr.slice(4, 5))
+
+    const favFruits = [
+      'apple',
+      'mango',
+      'banana',
+      'grapes',
+      'blueberry',
+      'kiwi',
+      'papaya',
+    ]
+    const brrrFruites = Brrr.from(favFruits)
+    expect(brrrFruites.slice(-5, -1).items).toEqual(favFruits.slice(-5, -1))
+    expect(brrrFruites.slice(-2, -1).items).toEqual(favFruits.slice(-2, -1))
+    expect(brrrFruites.slice(-1, -1).items).toEqual(favFruits.slice(-1, -1))
+    expect(brrrFruites.slice(-1, -2).items).toEqual(favFruits.slice(-1, -2))
+    expect(brrrFruites.slice(-3, -2).items).toEqual(favFruits.slice(-3, -2))
   })
 
   it('.splice should modify the array in place', () => {

@@ -17,7 +17,7 @@ export default class Brrr {
   set length(n) {
     const len = this.length
     if (n === len) return len
-    len > n ? this.removeFrom(n, len - n) : this.addTo(n, undefined)
+    len > n ? this.removeFrom(n, len - n - 1) : this.addTo(n - 1, undefined)
     return this.length
   }
 
@@ -85,16 +85,18 @@ export default class Brrr {
   }
 
   #removeFromLeft() {
-    if (this.length) {
-      if (this.length === 1) this.clear()
-      else if (this.#left.length > 0) this.#left.length--
+    const len = this.length
+    if (len) {
+      if (len === 1) this.clear()
+      else if (this.#left.length > 0) this.#left.pop()
     }
   }
 
   #removeFromRight() {
-    if (this.length) {
-      if (this.length === 1) this.clear()
-      else if (this.#right.length > 0) this.#right.length--
+    const len = this.length
+    if (len) {
+      if (len === 1) this.clear()
+      else if (this.#right.length > 0) this.#right.pop()
     }
   }
 
@@ -249,11 +251,16 @@ export default class Brrr {
    * This is exclusive of the element at the index 'end'.
    * If end is undefined, then the slice extends to the end of the array.
    */
-  slice(start, end = this.length) {
-    const collection = []
-    end = Math.min(end, this.length)
-    for (let i = start; i < end; ++i) collection.push(this.get(i))
-    return Brrr.from(collection)
+  slice(start = 0, end = this.length) {
+    const length = this.length
+    start = start < 0 ? Math.max(length + start, 0) : Math.min(start, length)
+    end = end < 0 ? Math.max(length + end, 0) : Math.min(end, length)
+
+    const slice = new Brrr()
+    slice.length = Math.max(end - start, 0)
+    for (let i = 0, len = slice.length; i < len; ++i)
+      slice.set(i, this.get(start + i))
+    return slice
   }
   /**
    * Removes elements from an array and,
