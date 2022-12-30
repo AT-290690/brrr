@@ -48,7 +48,7 @@ export default class Brrr {
   with(...initial) {
     if (this.length) this.clear()
     const half = (initial.length / 2) | 0.5
-    for (let i = half - 1; i >= 0; i--) this.#addToLeft(initial[i])
+    for (let i = half - 1; i >= 0; --i) this.#addToLeft(initial[i])
     for (let i = half; i < initial.length; ++i) this.#addToRight(initial[i])
     return this
   }
@@ -140,7 +140,7 @@ export default class Brrr {
     const initial = [...this]
     this.clear()
     const half = (initial.length / 2) | 0.5
-    for (let i = half - 1; i >= 0; i--) this.#addToLeft(initial[i])
+    for (let i = half - 1; i >= 0; --i) this.#addToLeft(initial[i])
     for (let i = half; i < initial.length; ++i) this.#addToRight(initial[i])
     return this
   }
@@ -192,7 +192,7 @@ export default class Brrr {
       throw new Error('TypeError: From input is not iterable')
     const out = new Brrr()
     const half = (iterable.length / 2) | 0.5
-    for (let i = half - 1; i >= 0; i--) out.#addToLeft(iterable[i])
+    for (let i = half - 1; i >= 0; --i) out.#addToLeft(iterable[i])
     for (let i = half; i < iterable.length; ++i) out.#addToRight(iterable[i])
     return out
   }
@@ -220,7 +220,7 @@ export default class Brrr {
   }
 
   unshift(...items) {
-    for (let i = items.length - 1; i >= 0; i--) this.#addToLeft(items[i])
+    for (let i = items.length - 1; i >= 0; --i) this.#addToLeft(items[i])
     return this.length
   }
 
@@ -304,7 +304,7 @@ export default class Brrr {
    * If fromIndex is omitted, the search starts at the last index in the array.
    */
   lastIndexOf(item) {
-    for (let i = this.length - 1; i >= 0; i--)
+    for (let i = this.length - 1; i >= 0; --i)
       if (this.get(i) === item) return i
   }
 
@@ -327,7 +327,7 @@ export default class Brrr {
   }
 
   findLast(callback = Identity, startIndex = 0) {
-    for (let i = this.length - 1 - startIndex; i >= 0; i--) {
+    for (let i = this.length - 1 - startIndex; i >= 0; --i) {
       if (i >= this.length) return
       const current = this.get(i)
       if (callback(current, i, this)) return current
@@ -366,7 +366,7 @@ export default class Brrr {
   }
 
   findLastIndex(callback = Identity, startIndex = 0) {
-    for (let i = this.length - 1 - startIndex; i >= 0; i--) {
+    for (let i = this.length - 1 - startIndex; i >= 0; --i) {
       const current = this.get(i)
       if (callback(current, i, this)) return i
     }
@@ -381,7 +381,7 @@ export default class Brrr {
   map(callback) {
     const result = new Brrr()
     const half = (this.length / 2) | 0.5
-    for (let i = half - 1; i >= 0; i--)
+    for (let i = half - 1; i >= 0; --i)
       result.#addToLeft(callback(this.get(i), i, this))
     for (let i = half, len = this.length; i < len; ++i)
       result.#addToRight(callback(this.get(i), i, this))
@@ -416,7 +416,7 @@ export default class Brrr {
   }
 
   reduceRight(callback, initial = this.at(-1)) {
-    for (let i = this.length - 1; i >= 0; i--)
+    for (let i = this.length - 1; i >= 0; --i)
       initial = callback(initial, this.get(i), i, this)
     return initial
   }
@@ -657,7 +657,7 @@ export default class Brrr {
   }
 
   insertLeft(...items) {
-    for (let i = items.length - 1; i >= 0; i--) this.#addToLeft(items[i])
+    for (let i = items.length - 1; i >= 0; --i) this.#addToLeft(items[i])
     return this
   }
 
@@ -875,7 +875,7 @@ export default class Brrr {
 
   scan(callback, dir = 1) {
     if (dir === -1)
-      for (let i = this.length - 1; i >= 0; i--) callback(this.get(i), i, this)
+      for (let i = this.length - 1; i >= 0; --i) callback(this.get(i), i, this)
     else
       for (let i = 0, len = this.length; i < len; ++i)
         callback(this.get(i), i, this)
@@ -1083,7 +1083,7 @@ const merge = (left, right, callback) => {
   }
   const out = new Brrr()
   const half = (arr.length / 2) | 0.5
-  for (let i = half - 1; i >= 0; i--) out.prepend(arr[i])
+  for (let i = half - 1; i >= 0; --i) out.prepend(arr[i])
   for (let i = half; i < arr.length; ++i) out.append(arr[i])
   return out
 }
