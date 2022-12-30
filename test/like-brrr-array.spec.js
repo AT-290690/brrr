@@ -299,6 +299,14 @@ describe('Brrr mimic Array', () => {
   })
 
   it('.slice should create a new collection from the same range', () => {
+    const numbers = [1, 2, 3, 4, 5]
+    const brrr = Brrr.from(numbers)
+    expect(brrr.slice().items).toEqual(numbers.slice())
+    expect(brrr.slice(2).items).toEqual(numbers.slice(2))
+    expect(brrr.slice(0, 3).items).toEqual(numbers.slice(0, 3))
+    expect(brrr.slice(-2, -1).items).toEqual(numbers.slice(-2, -1))
+    expect(brrr.slice(2, 1).items).toEqual(numbers.slice(2, 1))
+
     const arr = [4, 1, 1, 2, 3, 8, 7]
     const binArr = Brrr.from(arr)
     expect(binArr.slice(1).items).toEqual(arr.slice(1))
