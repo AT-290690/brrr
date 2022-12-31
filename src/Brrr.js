@@ -683,20 +683,26 @@ export default class Brrr {
     [1, 2, 3].take(0); // => []
    */
   take(n = 1) {
-    const collection = []
-    const len = Math.min(n, this.length)
-    for (let i = 0; i < len; ++i) collection.push(this.get(i))
-    return Brrr.from(collection)
+    const slice = new Brrr()
+    const sliceLen = Math.min(n, this.length)
+    const half = (sliceLen / 2) | 0.5
+    for (let i = half - 1; i >= 0; --i) slice.#addToLeft(this.get(i))
+    for (let i = half; i < sliceLen; ++i) slice.#addToRight(this.get(i))
+    return slice
   }
   /**
    * Creates a slice of array with n elements taken from the end.
    */
   takeRight(n = 1) {
-    const collection = []
     const length = this.length
-    const len = Math.min(n, length)
-    for (let i = 0; i < len; ++i) collection.push(this.get(length - (len - i)))
-    return Brrr.from(collection)
+    const slice = new Brrr()
+    const sliceLen = Math.min(n, length)
+    const half = (sliceLen / 2) | 0.5
+    for (let i = half - 1; i >= 0; --i)
+      slice.#addToLeft(this.get(length - (sliceLen - i)))
+    for (let i = half; i < sliceLen; ++i)
+      slice.#addToRight(this.get(length - (sliceLen - i)))
+    return slice
   }
 
   to(callback, initial = new Brrr()) {
@@ -745,8 +751,8 @@ export default class Brrr {
     const out = new Brrr()
     const A = new Set(a.toArray())
     const B = new Set(b.toArray())
-    A.forEach(item => out.append(item))
-    B.forEach(item => out.append(item))
+    A.forEach(item => out.#addToRight(item))
+    B.forEach(item => out.#addToRight(item))
     out.balance()
     return out
   }
@@ -756,8 +762,8 @@ export default class Brrr {
     const out = new Brrr()
     const A = new Set(a.toArray())
     const B = new Set(b.toArray())
-    B.forEach(item => !A.has(item) && out.append(item))
-    A.forEach(item => !B.has(item) && out.append(item))
+    B.forEach(item => !A.has(item) && out.#addToRight(item))
+    A.forEach(item => !B.has(item) && out.#addToRight(item))
     out.balance()
     return out
   }
@@ -767,7 +773,7 @@ export default class Brrr {
     const out = new Brrr()
     const A = new Set(a.toArray())
     const B = new Set(b.toArray())
-    B.forEach(item => A.has(item) && out.append(item))
+    B.forEach(item => A.has(item) && out.#addToRight(item))
     out.balance()
     return out
   }
@@ -777,7 +783,7 @@ export default class Brrr {
     const out = new Brrr()
     const A = new Set(a.toArray())
     const B = new Set(b.toArray())
-    A.forEach(item => !B.has(item) && out.append(item))
+    A.forEach(item => !B.has(item) && out.#addToRight(item))
     out.balance()
     return out
   }
@@ -795,7 +801,7 @@ export default class Brrr {
           const current = arr.get(index + i)
           if (current !== undefined) part.#addToRight(current)
         }
-        acc.append(part)
+        acc.#addToRight(part)
       }
       return acc
     }, new Brrr())
