@@ -97,6 +97,23 @@ describe('Brrr mimic Array', () => {
     expect(filterItems(fruits, 'an')).toEqual(
       filterItems(brrryFruits, 'an').items
     ) // ['banana', 'mango', 'orange']
+
+    const numbers = [1, 2, 3, 4, 5]
+    expect(Brrr.from(numbers).filter(x => x % 2 === 0).items).toEqual(
+      numbers.filter(x => x % 2 === 0)
+    )
+    expect(Brrr.from(numbers).filter(x => x % 2 === 0).items).toEqual(
+      numbers.filter(x => x % 2 === 0)
+    )
+    expect(Brrr.from([]).filter(x => x % 2 === 0).items).toEqual(
+      [].filter(x => x % 2 === 0)
+    )
+    expect(Brrr.from(numbers).filter((x, i) => x === i + 1).items).toEqual(
+      numbers.filter((x, i) => x === i + 1)
+    )
+    expect(
+      Brrr.from(numbers).filter((x, i, arr) => x === arr.get(i)).items
+    ).toEqual(numbers.filter((x, i, arr) => x === arr[i]))
   })
 
   it('operations 1 .map, .filter, .mergeSort, .reverse, .slice, .reduce, .flat should modify the collection the same', () => {
@@ -581,6 +598,34 @@ describe('Brrr mimic Array', () => {
     //
     // 1st iteration: [1,2,3][0] -> 1
     // 2nd iteration: [1,2][1] -> 2
+
+    const numbers = [1, 2, 3, 4, 5]
+
+    expect(Brrr.from(numbers).every(x => x > 0)).toBe(numbers.every(x => x > 0))
+    expect(Brrr.from(numbers).every(x => x % 2 === 0)).toBe(
+      numbers.every(x => x % 2 === 0)
+    )
+    expect(Brrr.from([]).every(x => x % 2 === 0)).toBe(
+      [].every(x => x % 2 === 0)
+    )
+    expect(Brrr.from(numbers).every((x, i) => x === i + 1)).toBe(
+      numbers.every((x, i) => x === i + 1)
+    )
+    expect(Brrr.from(numbers).every((x, i, arr) => x === arr.get(i))).toBe(
+      numbers.every((x, i, arr) => x === arr[i])
+    )
+
+    expect(Brrr.from(numbers).some(x => x > 0)).toBe(numbers.some(x => x > 0))
+    expect(Brrr.from(numbers).some(x => x % 2 === 0)).toBe(
+      numbers.some(x => x % 2 === 0)
+    )
+    expect(Brrr.from([]).some(x => x % 2 === 0)).toBe([].some(x => x % 2 === 0))
+    expect(Brrr.from(numbers).some((x, i) => x === i + 1)).toBe(
+      numbers.some((x, i) => x === i + 1)
+    )
+    expect(Brrr.from(numbers).some((x, i, arr) => x === arr.get(i))).toBe(
+      numbers.some((x, i, arr) => x === arr[i])
+    )
   })
 
   function isBiggerThan10(element, index, array) {
