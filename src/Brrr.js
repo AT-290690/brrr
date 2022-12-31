@@ -257,9 +257,10 @@ export default class Brrr {
     end = end < 0 ? Math.max(length + end, 0) : Math.min(end, length)
 
     const slice = new Brrr()
-    slice.length = Math.max(end - start, 0)
-    for (let i = 0, len = slice.length; i < len; ++i)
-      slice.set(i, this.get(start + i))
+    const sliceLen = Math.max(end - start, 0)
+    const half = (sliceLen / 2) | 0.5
+    for (let i = half - 1; i >= 0; --i) slice.#addToLeft(this.get(start + i))
+    for (let i = half; i < sliceLen; ++i) slice.#addToRight(this.get(start + i))
     return slice
   }
   /**
