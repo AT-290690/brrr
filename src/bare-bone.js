@@ -21,9 +21,18 @@ export default class Bbbr {
     return this.#left.length + this.#right.length - 1
   }
 
+  get first() {
+    return this.getItem(0)
+  }
+
+  get last() {
+    return this.getItem(this.length - 1)
+  }
+
   clear() {
     this.#left.length = 1
     this.#right.length = 0
+    return this
   }
 
   getItem(i) {
@@ -36,6 +45,7 @@ export default class Bbbr {
     const offset = i + this.#offsetLeft
     if (offset >= 0) this.#right[offset] = value
     else this.#left[offset * -1] = value
+    return this
   }
 
   #addLeft(item) {
@@ -77,25 +87,25 @@ export default class Bbbr {
     for (let i = half; i < len; ++i) this.#addRight(initial[i])
   }
 
-  append(...items) {
-    for (let i = 0; i < items.length; ++i) this.#addRight(items[i])
+  append(item) {
+    this.#addRight(item)
+    return this
   }
 
-  prepend(...items) {
-    for (let i = items.length - 1; i >= 0; --i) this.#addLeft(items[i])
+  prepend(item) {
+    this.#addLeft(item)
+    return this
   }
 
   head() {
     if (this.#offsetRight === 0) this.#balance()
-    const last = getItem(this.length - 1)
     this.#removeRight()
-    return last
+    return this
   }
 
   tail() {
-    if (offsetLeft === 0) this.#balance()
-    const first = this.getItem(0)
+    if (this.#offsetLeft === 0) this.#balance()
     this.#removeLeft()
-    return first
+    return this
   }
 }
