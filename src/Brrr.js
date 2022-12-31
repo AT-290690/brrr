@@ -786,11 +786,15 @@ export default class Brrr {
     const res = this.reduce((acc, _, index, arr) => {
       if (index % groups === 0) {
         const part = new Brrr()
-        for (let i = 0; i < groups; ++i) {
+        const half = (groups / 2) | 0.5
+        for (let i = half - 1; i >= 0; --i) {
           const current = arr.get(index + i)
-          if (current !== undefined) part.append(current)
+          if (current !== undefined) part.#addToLeft(current)
         }
-        part.balance()
+        for (let i = half; i < groups; ++i) {
+          const current = arr.get(index + i)
+          if (current !== undefined) part.#addToRight(current)
+        }
         acc.append(part)
       }
       return acc
