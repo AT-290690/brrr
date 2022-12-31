@@ -199,10 +199,10 @@ describe('Brrr extra features', () => {
     expect(Brrr.of('a', 'c', 'b').isSorted()).toBe(false)
     expect(Brrr.of('c', 'b', 'a').isSorted()).toBe(false)
     expect(Brrr.of('c', 'b', 'a').isSorted(false)).toBe(true)
-    expect(Brrr.of(1, 2, 3, 4).quickSort('asc').isSorted('asc')).toBe(true)
-    expect(Brrr.of(1, 2, 3, 4).quickSort('des').isSorted('des')).toBe(true)
-    expect(Brrr.of(1, 2, 3, 4).quickSort('asc').isSorted('des')).toBe(false)
-    expect(Brrr.of(1, 2, 3, 4).quickSort('des').isSorted('asc')).toBe(false)
+    expect(Brrr.of(1, 2, 3, 4).quickSort(1).isSorted(1)).toBe(true)
+    expect(Brrr.of(1, 2, 3, 4).quickSort(-1).isSorted(-1)).toBe(true)
+    expect(Brrr.of(1, 2, 3, 4).quickSort(1).isSorted(-1)).toBe(false)
+    expect(Brrr.of(1, 2, 3, 4).quickSort(-1).isSorted(1)).toBe(false)
     expect(
       Brrr.from([
         { key: 'a', value: 1 },
@@ -224,10 +224,10 @@ describe('Brrr extra features', () => {
   })
 
   it('.quickSort should work', () => {
-    expect(Brrr.from([3, 1, 8, 5, 9, 1, 2, 4]).quickSort('asc').items).toEqual([
+    expect(Brrr.from([3, 1, 8, 5, 9, 1, 2, 4]).quickSort(1).items).toEqual([
       1, 1, 2, 3, 4, 5, 8, 9,
     ])
-    expect(Brrr.from([3, 1, 8, 5, 9, 1, 2, 4]).quickSort('des').items).toEqual(
+    expect(Brrr.from([3, 1, 8, 5, 9, 1, 2, 4]).quickSort(-1).items).toEqual(
       [1, 1, 2, 3, 4, 5, 8, 9].reverse()
     )
   })

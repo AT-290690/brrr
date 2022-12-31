@@ -504,11 +504,11 @@ export default class Brrr {
    * @param order - the order of sorting
    * defaults to ascending
    * @example
-   * arr.quickSort('asc')
-   * arr.quickSort('des')
+   * arr.quickSort(1)
+   * arr.quickSort(-1)
    * */
   quickSort(order) {
-    return order === 'des'
+    return order === -1
       ? quickSortDesc(this, 0, this.length - 1)
       : quickSortAsc(this, 0, this.length - 1)
   }
@@ -934,11 +934,11 @@ export default class Brrr {
    * (current, index, arr) => !index || arr.at(index - 1) <= current
    * @returns boolean
    */
-  isSorted(order = 'asc') {
+  isSorted(order = 1) {
     return this.every(
       typeof order === 'function'
         ? order
-        : order === 'asc'
+        : order === 1
         ? (current, index, arr) => !index || arr.at(index - 1) <= current
         : (current, index, arr) => !index || arr.at(index - 1) >= current
     )
