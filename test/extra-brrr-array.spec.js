@@ -128,7 +128,7 @@ describe('Brrr extra features', () => {
     expect(arr.length).toBe(18)
   })
 
-  it('.removeFrom should work', () => {
+  it('.removeFrom and .addAt should work', () => {
     expect(
       new Brrr().with(-2, -1, 0, 1, 2, 3, 4, 5, 2, 3, 4, 5).removeFrom(0, 0)
         .items
@@ -168,6 +168,33 @@ describe('Brrr extra features', () => {
       Brrr.of(1, 2, 3, 4).addAt(2, '#1', '#2', '#3').removeFrom(1, 3).items
     ).toEqual([1, '#3', 3, 4])
 
+    expect(Brrr.of(1, 2, 3, 4).addAt(3, '#1', '#2', '#3').items).toEqual([
+      1,
+      2,
+      3,
+      '#1',
+      '#2',
+      '#3',
+      4,
+    ])
+    expect(Brrr.of(1, 2, 3, 4).addAt(4, '#1', '#2', '#3').items).toEqual([
+      1,
+      2,
+      3,
+      4,
+      '#1',
+      '#2',
+      '#3',
+    ])
+    expect(Brrr.of(1, 2, 3, 4).addAt(0, '#1', '#2', '#3').items).toEqual([
+      '#1',
+      '#2',
+      '#3',
+      1,
+      2,
+      3,
+      4,
+    ])
     expect(
       Brrr.of(1, 2, 3, 4)
         .addAt(2, '#1', '#2', '#3', '#4')

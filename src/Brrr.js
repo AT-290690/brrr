@@ -584,9 +584,8 @@ export default class Brrr {
   }
 
   removeFrom(index, amount) {
-    const length = this.length
-    if (length - 1 <= index) return this.head()
-    const len = length - index
+    if (this.length - 1 <= index) return this.head()
+    const len = this.length - index
     amount = Math.min(len, amount)
     const isCloserToTheRight = this.offsetLeft + index > 0
     if (isCloserToTheRight) {
