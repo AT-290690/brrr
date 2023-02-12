@@ -357,9 +357,9 @@ describe('Brrr extra features', () => {
   })
   it('.swapRemove should work', () => {
     const arr = new Brrr().with(1, 2, 3, 4, 5)
-    expect(arr.swapRemoveLeft(2))
+    arr.swapRemoveLeft(2).items
     expect(arr.items).toEqual([2, 3, 1, 5])
-    expect(arr.swapRemoveRight(2))
+    arr.swapRemoveRight(2).items
     expect(arr.items).toEqual([2, 3, 5])
   })
   it('.to should work', () => {
