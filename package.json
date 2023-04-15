@@ -23,11 +23,20 @@
   "devDependencies": {
     "@babel/preset-env": "^7.14.9"
   },
-  "name": "brrr",
+  "name": "array-go-brrr",
   "version": "1.0.0",
   "description": "Fast javascript array implementation",
   "main": "index.js",
-  "repository": "https://github.com/AT-290690/brrr.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AT-290690/jsdoc-spec.git"
+  },
+  "keywords": [
+    "array",
+    "data-structure",
+    "queue",
+    "stack"
+  ],
   "author": "AT-290629 <antony.k.tonev@gmail.com>",
   "license": "(MIT OR Apache-2.0)"
 }
