@@ -1,16 +1,10 @@
-# Brrr
+# array go brrr
 
 <p align="center">
 <img width="50" src="./playground/assets/images/logo.svg"/>
 </p>
 
 ## Instant array operations
-
-npm i --save-dev
-
-npm run test
-
-npm run bench
 
 insert O(1)  
 remove O(1)  
@@ -71,10 +65,7 @@ Indexing is guaranteed without the need of reordering thanks to simple arithmeti
 Comparison for N = 200 000 (runned on MacBook Pro M1 chip laptop)
 
 ```
-$ node benchmark/benchmark.js
-NANOBENCH version 2
-
-> node benchmark/benchmark.js
+Benchmark
 
 N = 200 000
 
