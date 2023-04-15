@@ -1,9 +1,5 @@
 # array go brrr
 
-<p align="center">
-<img width="50" src="./playground/assets/images/logo.svg"/>
-</p>
-
 ## Instant array operations
 
 insert O(1)  

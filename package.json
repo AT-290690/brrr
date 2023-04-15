@@ -1,10 +1,6 @@
 {
   "type": "module",
-  "dependencies": {
-    "babel-jest": "^27.0.6",
-    "jest": "^27.0.6",
-    "nanobench": "^2.1.1"
-  },
+  "dependencies": {},
   "scripts": {
     "test": "jest test test",
     "bench": "node benchmark/benchmark.js",
@@ -21,6 +17,9 @@
     "singleQuote": true
   },
   "devDependencies": {
+    "babel-jest": "^27.0.6",
+    "jest": "^27.0.6",
+    "nanobench": "^2.1.1",
     "@babel/preset-env": "^7.14.9"
   },
   "name": "array-go-brrr",
