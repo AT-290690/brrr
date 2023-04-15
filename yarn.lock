@@ -1413,12 +1413,6 @@
     "escalade" "^3.1.1"
     "node-releases" "^1.1.73"
 
-"brrr@file:../../../../../usr/local/lib/node_modules/brrr":
-  "resolved" "file:../../../../../usr/local/lib/node_modules/brrr"
-  "version" "1.0.0"
-  dependencies:
-    "mri" "^1.1.5"
-
 "bser@2.1.1":
   "integrity" "sha512-gQxTNE/GAfIIrmHLUE3oJyp5FO6HRBfhjnw4/wMmA63ZGDJnWBmgY/lyQBpnDUkGmAhbSe39tx2d/iTOAfglwQ=="
   "resolved" "https://registry.npmjs.org/bser/-/bser-2.1.1.tgz"
