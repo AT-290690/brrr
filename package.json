@@ -23,7 +23,7 @@
     "@babel/preset-env": "^7.14.9"
   },
   "name": "array-go-brrr",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Fast javascript array implementation",
   "main": "index.js",
   "repository": {
