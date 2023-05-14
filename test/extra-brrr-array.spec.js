@@ -620,4 +620,34 @@ describe('Brrr extra features', () => {
       [3, 6, 8, 10],
     ])
   })
+
+  it('.zip and .zipVary should work', () => {
+    expect(of('a', 'b', 'c').zip(of(1, 2, 3)).items).toEqual([
+      ['a', 1],
+      ['b', 2],
+      ['c', 3],
+    ])
+    expect(
+      of(of(true, false, false), of('a', 'b', 'c'), of(1, 2, 3)).zipVary().items
+    ).toEqual([
+      [true, 'a', 1],
+      [false, 'b', 2],
+      [false, 'c', 3],
+    ])
+    expect(
+      of(
+        of(true, false, false),
+        of('a', 'b', 'c', 'd'),
+        of(1, 2, 3, 4)
+      ).zipVary().items
+    ).toEqual([
+      [true, 'a', 1],
+      [false, 'b', 2],
+      [false, 'c', 3],
+      [undefined, 'd', 4],
+    ])
+    expect(of(1, 2, 3).zip(of(true, false, false)).unzip().items).toEqual(
+      of(1, 2, 3).concat(of(true, false, false)).partition(3).items
+    )
+  })
 })

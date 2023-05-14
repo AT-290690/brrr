@@ -50,7 +50,7 @@ document.addEventListener('keydown', e => {
 ;(() => {
   document.getElementById('run').addEventListener('click', run)
   consoleElement.value = ''
-  editor.setValue(`const { of, isBrrr, matrix, from, ones, zeroes } = Brrr;
+  editor.setValue(`const { of, ofSize, isBrrr, matrix, from, ones, zeroes, range } = Brrr;
 return of(1, 2, 3, 4).items`)
   ;['Brrr', 'List'].forEach(createButton)
   window.dispatchEvent(new Event('resize'))

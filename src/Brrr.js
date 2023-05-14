@@ -211,6 +211,22 @@ export default class Brrr {
     return Brrr.from(new Array(size).fill(1))
   }
 
+  static ofSize(N = 0) {
+    const out = new Brrr()
+    const half = (N / 2) | 0.5
+    for (let i = half - 1; i >= 0; --i) out.#addToLeft(undefined)
+    for (let i = half; i < N; ++i) out.#addToRight(undefined)
+    return out
+  }
+
+  static range(end = 0, start = 0) {
+    const out = new Brrr()
+    const half = (end / 2) | 0.5
+    for (let i = half - 1; i >= 0; --i) out.#addToLeft(start + i)
+    for (let i = half; i < end; ++i) out.#addToRight(start + i)
+    return out
+  }
+
   at(index) {
     if (index < 0) return this.get(this.length + index)
     else return this.get(index)
@@ -785,6 +801,24 @@ export default class Brrr {
     A.forEach(item => !B.has(item) && out.#addToRight(item))
     out.balance()
     return out
+  }
+
+  zip(other) {
+    return this.map((item, index) => Brrr.of(item, other.get(index)))
+  }
+
+  unzip() {
+    const unzipped = this.at(0).map(() => new Brrr())
+    for (let j = 0; j < unzipped.length; ++j)
+      for (let i = 0; i < this.length; ++i)
+        unzipped.get(j).#addToRight(this.get(i).get(j))
+    return unzipped
+  }
+
+  zipVary() {
+    return Brrr.ofSize(Math.max(...this.map(a => a.length))).map((_, index) =>
+      this.map(a => a.get(index))
+    )
   }
 
   partition(groups = 1) {

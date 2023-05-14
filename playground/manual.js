@@ -362,6 +362,36 @@ return a.concat(b).items`,
       `(Array): A matrix - the cartesian product.`,
     ],
   },
+  zip: {
+    source: `return Brrr.of('a', 'b', 'c').zip(Brrr.of(1, 2, 3)).items`,
+    content: [
+      `Creates an array of grouped elements, the first of which contains the first elements of the given arrays, the second of which contains the second elements of the given arrays, and so on.`,
+      `Arguments`,
+      `[other] (Array): The other array to zip with`,
+      `Returns`,
+      `(Array): A matrix - the zipped  array.`,
+    ],
+  },
+  unzip: {
+    source: `return Brrr.of('a', 'b', 'c').zip(Brrr.of(1, 2, 3)).unzip().items`,
+    content: [
+      `Oposite of zip`,
+      `Arguments`,
+      `[void]`,
+      `Returns`,
+      `(Array): A matrix - the unzipped arrays.`,
+    ],
+  },
+  zipVary: {
+    source: `return Brrr.of(Brrr.of(true, false, false), Brrr.of('a', 'b', 'c'), Brrr.of(1, 2, 3)).zipVary().items`,
+    content: [
+      `Creates an array of grouped elements, the first of which contains the first elements of the given arrays, the second of which contains the second elements of the given arrays, and so on.`,
+      `Arguments`,
+      `[void]`,
+      `Returns`,
+      `(Array): A matrix - the zipped array.`,
+    ],
+  },
   head: {
     source: `const arr = Brrr.of(1, 2, 3, 4)
 return arr.head().items`,
