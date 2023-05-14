@@ -5,7 +5,7 @@ const N = 200_000
 
 {
   let input = ''
-  for (let i = 0; i < N; i++) {
+  for (let i = 0; i < N; ++i) {
     input += Math.random() > 0.25 ? '(' : ')'
   }
   Benchmark(`brrrArray matching parens N = ${N}`, bench => {
@@ -35,7 +35,7 @@ const N = 200_000
   const tokens = { '(': ')', '{': '}', '[': ']' }
   const gen = Object.entries(tokens)
   let input = ''
-  for (let i = 0; i < N; i++) {
+  for (let i = 0; i < N; ++i) {
     input +=
       gen[((Math.random() * 3) | 0.5) % 3][((Math.random() * 2) | 0.5) % 2]
   }

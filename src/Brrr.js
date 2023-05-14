@@ -808,6 +808,26 @@ export default class Brrr {
     return res
   }
 
+  partitionIf(predicate = _Identity) {
+    const out = this.reduce((acc, x, i, a) => {
+      acc.at(predicate(x, i, a) ? 0 : 1).#addToRight(x)
+      return acc
+    }, Brrr.of(new Brrr(), new Brrr()))
+    out.at(0).balance()
+    out.at(1).balance()
+    return out
+  }
+
+  cartesianProduct() {
+    return this.reduce(
+      (a, b) =>
+        a
+          .map(x => b.map(y => x.concat(Brrr.of(y))))
+          .reduce((a, b) => a.concat(b), new Brrr()),
+      Brrr.of(new Brrr())
+    )
+  }
+
   window(size = this.length) {
     const len = this.length
     const ref = this
@@ -896,6 +916,12 @@ export default class Brrr {
     else
       for (let i = 0, len = this.length; i < len; ++i)
         callback(this.get(i), i, this)
+    return this
+  }
+
+  mask(callback) {
+    for (let i = 0, len = this.length; i < len; ++i)
+      this.set(i, +callback(this.get(i), i, this))
     return this
   }
 

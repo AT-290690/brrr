@@ -55,6 +55,7 @@ mergeSort(callback = (a, b) => (a < b ? -1 : 1))
 quickSort(order)
 join(separator = ',')
 concat(second)
+cartesianProduct()
 flat(levels = 1)
 flatten(callback)
 addTo(index, value)
@@ -348,6 +349,19 @@ return a.concat(b).items`,
       `(Array): The new concatenated array.`,
     ],
   },
+  cartesianProduct: {
+    source: `return Brrr.of(0, 1, true, false)
+                .partition(2)
+                .cartesianProduct()
+                .items`,
+    content: [
+      `Creates a matrix containing the cartesian product of its nested groups`,
+      `Arguments`,
+      `[void]`,
+      `Returns`,
+      `(Array): A matrix - the cartesian product.`,
+    ],
+  },
   head: {
     source: `const arr = Brrr.of(1, 2, 3, 4)
 return arr.head().items`,
@@ -412,6 +426,16 @@ return arr.partition(3).items`,
       `[size=1] (Number): The length of each chunk`,
       `Returns`,
       `(Array): Returns the new array of chunks.`,
+    ],
+  },
+  partitionIf: {
+    source: `new Brrr().with(1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3).partitionIf(x => x % 2).items)`,
+    content: [
+      `Creates an array of elements split into 2 groups. If the predicate returns true - the item goes into the right array - else it goues on the left one.`,
+      `Arguments`,
+      `[callback= Identity] (Function): The function invoked per iteration.`,
+      `Returns`,
+      `(Array): Returns the new array with 2 chunks.`,
     ],
   },
   difference: {

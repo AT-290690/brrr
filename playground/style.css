@@ -23,7 +23,7 @@ html {
   -webkit-font-smoothing: antialiased;
 }
 body {
-  background: transparent;
+  background: var(--theme-bg-color);
   overflow: hidden;
 }
 
