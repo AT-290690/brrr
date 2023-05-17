@@ -418,6 +418,24 @@ export default class Brrr {
     return this
   }
 
+  adjacentDifference(callback) {
+    if (this.length === 1) return this
+    const result = new Brrr()
+    result.#addToLeft(this.get(0))
+    for (let i = 1, len = this.length; i < len; ++i)
+      result.set(i, callback(this.get(i - 1), this.get(i), i, this))
+    return result
+  }
+
+  adjacentDifferenceRight(callback) {
+    if (this.length === 1) return this
+    const result = new Brrr()
+    for (let i = this.length - 2; i >= 0; --i)
+      result.set(i, callback(this.get(i + 1), this.get(i), i, this))
+    result.#addToRight(this.at(-1))
+    return result
+  }
+
   forEach(callback) {
     for (let i = 0, len = this.length; i < len; ++i)
       callback(this.get(i), i, this)
