@@ -620,12 +620,44 @@ describe('Brrr extra features', () => {
       [3, 6, 8, 10],
     ])
   })
-
+  it('.put should work', () => {
+    expect(of(1, 2, 3).put(-1, 10).items).toEqual([1, 2, 10])
+    expect(of(1, 2, 3).put(-2, 20).items).toEqual([1, 20, 3])
+    expect(of(1, 2, 3).put(2, 20).items).toEqual([1, 2, 20])
+    expect(of(1, 2, 3).put(0, 3).items).toEqual([3, 2, 3])
+  })
   it('.adjacentDifference should work', () => {
+    expect(of(1, 2, 3).adjacentDifference().items).toEqual([1, 1, 1])
+    expect(of(1, 2, 3).adjacentDifference((a, b) => a + b).items).toEqual([
+      1, 3, 5,
+    ])
+    expect(of(1, 2, 3, 5, 9, 11, 12).adjacentDifference().items).toEqual([
+      1, 1, 1, 2, 4, 2, 1,
+    ])
+    expect(
+      of(1, 2, 3, 5, 9, 11, 12).adjacentDifference((a, b) => a + b).items
+    ).toEqual([1, 3, 5, 8, 14, 20, 23])
     expect(
       of(4, 6, 9, 13, 18, 19, 19, 15, 10).adjacentDifference((a, b) => b - a)
         .items
     ).toEqual([4, 2, 3, 4, 5, 1, 0, -4, -5])
+    expect(of(1, 2, 13).reverse().adjacentDifferenceRight().items).toEqual(
+      of(1, 2, 13).adjacentDifference().reverse().items
+    )
+    expect(
+      of(1, 2, 3)
+        .reverse()
+        .adjacentDifferenceRight((a, b) => a + b).items
+    ).toEqual(
+      of(1, 2, 3)
+        .adjacentDifference((a, b) => a + b)
+        .reverse().items
+    )
+
+    expect(
+      of(1, 2, 3, 5, 9, 11, 12).reverse().adjacentDifferenceRight().items
+    ).toEqual(of(1, 2, 3, 5, 9, 11, 12).adjacentDifference().reverse().items)
+
     expect(
       of(4, 6, 9, 13, 18, 19, 19, 15, 10)
         .reverse()

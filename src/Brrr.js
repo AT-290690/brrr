@@ -70,6 +70,14 @@ export default class Brrr {
     return this
   }
 
+  put(index, value) {
+    index = index < 0 ? this.length + index : index
+    const offset = index + this.offsetLeft
+    if (offset >= 0) this.#right[offset] = value
+    else this.#left[offset * -1] = value
+    return this
+  }
+
   clear() {
     this.#left.length = 1
     this.#right.length = 0
@@ -418,21 +426,20 @@ export default class Brrr {
     return this
   }
 
-  adjacentDifference(callback) {
+  adjacentDifference(callback = (a, b) => b - a) {
     if (this.length === 1) return this
-    const result = new Brrr()
-    result.#addToLeft(this.get(0))
+    const result = Brrr.of(this.get(0))
     for (let i = 1, len = this.length; i < len; ++i)
       result.set(i, callback(this.get(i - 1), this.get(i), i, this))
     return result
   }
 
-  adjacentDifferenceRight(callback) {
+  adjacentDifferenceRight(callback = (a, b) => b - a) {
     if (this.length === 1) return this
     const result = new Brrr()
     for (let i = this.length - 2; i >= 0; --i)
       result.set(i, callback(this.get(i + 1), this.get(i), i, this))
-    result.#addToRight(this.at(-1))
+    result.set(this.length - 1, this.get(this.length - 1))
     return result
   }
 
@@ -962,11 +969,12 @@ export default class Brrr {
     return Brrr.from([...this])
   }
 
-  scan(callback, dir = 1) {
+  scan(callback, dir = 1, start = 0) {
     if (dir === -1)
-      for (let i = this.length - 1; i >= 0; --i) callback(this.get(i), i, this)
+      for (let i = this.length - 1 - start; i >= 0; --i)
+        callback(this.get(i), i, this)
     else
-      for (let i = 0, len = this.length; i < len; ++i)
+      for (let i = start, len = this.length; i < len; ++i)
         callback(this.get(i), i, this)
     return this
   }
