@@ -427,20 +427,52 @@ export default class Brrr {
   }
 
   adjacentDifference(callback = (a, b) => b - a) {
-    if (this.length === 1) return this
+    const len = this.length
+    if (len === 1) return this
     const result = Brrr.of(this.get(0))
-    for (let i = 1, len = this.length; i < len; ++i)
+    for (let i = 1; i < len; ++i)
       result.set(i, callback(this.get(i - 1), this.get(i), i, this))
     return result
   }
 
   adjacentDifferenceRight(callback = (a, b) => b - a) {
-    if (this.length === 1) return this
+    const len = this.length
+    if (len === 1) return this
     const result = new Brrr()
-    for (let i = this.length - 2; i >= 0; --i)
+    for (let i = len - 2; i >= 0; --i)
       result.set(i, callback(this.get(i + 1), this.get(i), i, this))
-    result.set(this.length - 1, this.get(this.length - 1))
+    result.set(len - 1, this.get(len - 1))
     return result
+  }
+
+  adjacentFind(callback = _BinaryIdentity) {
+    const len = this.length
+    if (len === 1) return this.get(0)
+    for (let i = 1; i < len; ++i)
+      if (callback(this.get(i - 1), this.get(i), i, this)) return this.get(i)
+  }
+
+  adjacentFindLast(callback = _BinaryIdentity) {
+    const len = this.length
+    if (len === 1) return this.get(len - 1)
+    for (let i = len - 2; i >= 0; --i)
+      if (callback(this.get(i + 1), this.get(i), i, this)) return this.get(i)
+  }
+
+  adjacentFindIndex(callback = _BinaryIdentity) {
+    const len = this.length
+    if (len === 1) return this.get(0)
+    for (let i = 1; i < len; ++i)
+      if (callback(this.get(i - 1), this.get(i), i, this)) return i - 1
+    return -1
+  }
+
+  adjacentFindLastIndex(callback = _BinaryIdentity) {
+    const len = this.length
+    if (len === 1) return this.get(len - 1)
+    for (let i = len - 2; i >= 0; --i)
+      if (callback(this.get(i + 1), this.get(i), i, this)) return i + 1
+    return -1
   }
 
   forEach(callback) {
@@ -1218,6 +1250,8 @@ const _binarySearch = _tailCallOptimisedRecursion(
   }
 )
 const _Identity = current => current
+const _BinaryIdentity = (a, b) => a === b
+
 class _Group {
   constructor() {
     this.items = {}

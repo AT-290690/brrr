@@ -653,11 +653,9 @@ describe('Brrr extra features', () => {
         .adjacentDifference((a, b) => a + b)
         .reverse().items
     )
-
     expect(
       of(1, 2, 3, 5, 9, 11, 12).reverse().adjacentDifferenceRight().items
     ).toEqual(of(1, 2, 3, 5, 9, 11, 12).adjacentDifference().reverse().items)
-
     expect(
       of(4, 6, 9, 13, 18, 19, 19, 15, 10)
         .reverse()
@@ -667,5 +665,40 @@ describe('Brrr extra features', () => {
         .adjacentDifference((a, b) => b - a)
         .reverse().items
     )
+    expect(of(5, 7, 4, 8, 2).adjacentDifference((a, b) => a * b).items).toEqual(
+      [5, 35, 28, 32, 16]
+    )
+    expect(
+      of(5, 7, 4, 8, 2)
+        .reverse()
+        .adjacentDifferenceRight((a, b) => a * b).items
+    ).toEqual(
+      of(5, 7, 4, 8, 2)
+        .adjacentDifference((a, b) => a * b)
+        .reverse().items
+    )
+  })
+  it('.adjacentFind should work', () => {
+    expect(of(1, 2, 3, 4, 4).adjacentFind()).toBe(4)
+    expect(of(1, 1, 2, 3, 4).adjacentFind()).toBe(1)
+
+    expect(of(1, 2, 3, 4, 4).adjacentFind()).toBe(
+      of(1, 2, 3, 4, 4).adjacentFindLast()
+    )
+    expect(of(1, 1, 2, 3, 4).adjacentFind()).toBe(
+      of(1, 1, 2, 3, 4).adjacentFindLast()
+    )
+    expect(of(1, 1, 2, 3, 4, 4).adjacentFind()).toBe(
+      of(4, 4, 2, 3, 1, 1).adjacentFindLast()
+    )
+    expect(
+      of(2, 5, 8, 11).adjacentFind((a, b) => b - a !== 3) == undefined
+    ).toBe(true)
+  })
+  it('.adjacentFindIndex should work', () => {
+    expect(of(1, 2, 3, 4, 4).adjacentFindIndex()).toBe(3)
+    expect(of(1, 1, 2, 3, 4).adjacentFindIndex()).toBe(0)
+    expect(of(1, 2, 3, 4, 4).adjacentFindLastIndex()).toBe(4)
+    expect(of(1, 1, 2, 3, 4).adjacentFindLastIndex()).toBe(1)
   })
 })

@@ -239,6 +239,18 @@ return arr.set(2, 29)`,
       `(Array) Reference to the array`,
     ],
   },
+  put: {
+    source: `const arr = Brrr.of(1, 2, 3, 4, 5)
+return arr.put(-1, 29)`,
+    content: [
+      `Set element of the array at given positive/negative index`,
+      `Arguments`,
+      `[index] (Number): index of the array`,
+      `[item] (*): item to set`,
+      `Returns`,
+      `(Array) Reference to the array`,
+    ],
+  },
   swap: {
     source: `const arr = Brrr.of(1, 2, 3, 4, 5)
 return arr.swap(0, 3)`,
