@@ -22,12 +22,12 @@
     "nanobench": "^2.1.1"
   },
   "name": "array-go-brrr",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Fast javascript array implementation",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AT-290690/jsdoc-spec.git"
+    "url": "git+https://github.com/AT-290690/brrr.git"
   },
   "keywords": [
     "array",
