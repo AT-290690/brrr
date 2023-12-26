@@ -746,36 +746,6 @@ return a.isEqual(b)
       `(Regular Array): Returns a regular array representation of the array`,
     ],
   },
-  isShortCircuited: {
-    source: `return Brrr.of(1, 2, 3).isShortCircuited()`,
-    content: [
-      `Check if the array has short circuited.`,
-      `Short circuit is when a .shortCircuitIf of .shortCircuitUnless returned true somewhere on the chain`,
-      `if .isShortCircuited returns true it means that the array is disabled`,
-      `Arguments`,
-      `[void]`,
-      `Returns`,
-      `(boolean): true if the array did short circuit and false otherwise`,
-    ],
-  },
-  shortCircuitIf: {
-    source: `return Brrr.of()
-.shortCircuitIf(self => self.isEmpty())
-.map(x => x ** 2)
-.filter(x => x % 2)
-.isShortCircuited()`,
-    content: [
-      `Stop iterating the array if the predicate function returns true`,
-      `The array is replaced by a Shadow entity if the functions returns true`,
-      `The shadow is a disabled version of the array.`,
-      `It has all of the methods of the array all of them return the shadow.`,
-      `isShortCircuited called on the shadow will return true.`,
-      `Arguments`,
-      `[predicate] (Function): The function invoked on the array (self) => self.length > 10`,
-      `Returns`,
-      `(Shadow | Array): returns a Shadow or keeps the same array`,
-    ],
-  },
   matrix: {
     source: `return Brrr.matrix(5, 4, 2)`,
     content: [

@@ -133,18 +133,6 @@ export default class Brrr {
     return _isEqual(this, other)
   }
 
-  isShortCircuited() {
-    return false
-  }
-
-  shortCircuitIf(predicate) {
-    return predicate(this) ? _shadow : this
-  }
-
-  shortCircuitUnless(predicate) {
-    return predicate(this) ? this : _shadow
-  }
-
   balance() {
     if (this.isBalanced()) return this
     const initial = [...this]
@@ -557,7 +545,7 @@ export default class Brrr {
       if (acc.has(key)) acc.get(key).append(item)
       else acc.set(key, new Brrr(key).with(item))
       return acc
-    }, new _Group())
+    }, new Map())
     out.forEach(item => item.balance())
     return out
   }
@@ -1100,14 +1088,6 @@ const _isIterable = iter =>
     ? false
     : typeof iter[Symbol.iterator] === 'function'
 
-const _tailCallOptimisedRecursion =
-  func =>
-  (...args) => {
-    let result = func(...args)
-    while (typeof result === 'function') result = result()
-    return result
-  }
-
 const _flatten = (collection, levels, flat) =>
   collection.reduce((acc, current) => {
     if (Brrr.isBrrr(current)) acc.push(...flat(current, levels))
@@ -1236,62 +1216,20 @@ const _mergeSort = (array, callback) => {
   )
 }
 
-const _binarySearch = _tailCallOptimisedRecursion(
-  (arr, target, by, greather, start, end) => {
-    if (start > end) return undefined
-    const index = ((start + end) / 2) | 0.5
-    const current = arr.get(index)
-    if (current === undefined) return undefined
-    const identity = by(current)
-    if (identity === target) return current
-    if (greather(current))
-      return _binarySearch(arr, target, by, greather, start, index - 1)
-    else return _binarySearch(arr, target, by, greather, index + 1, end)
-  }
-)
-const _Identity = current => current
-const _BinaryIdentity = (a, b) => a === b
-
-class _Group {
-  constructor() {
-    this.items = {}
-  }
-  get(key) {
-    return this.items[key]
-  }
-  set(key, value) {
-    this.items[key] = value
-    return this
-  }
-  get values() {
-    return Object.values(this.items)
-  }
-  get keys() {
-    return Object.keys(this.items)
-  }
-  has(key) {
-    return key in this.items
-  }
-  forEntries(callback) {
-    for (let key in this.items) {
-      callback([key, this.items[key]], this.items)
-    }
-    return this
-  }
-  forEach(callback) {
-    for (let key in this.items) {
-      callback(this.items[key], key)
-    }
-    return this
-  }
-  map(callback) {
-    for (let key in this.items) {
-      this.items[key] = callback(this.items[key], key, this.items)
-    }
-    return this
-  }
+const _binarySearch = (arr, target, by, greather, start, end) => {
+  if (start > end) return undefined
+  const index = ((start + end) / 2) | 0.5
+  const current = arr.get(index)
+  if (current === undefined) return undefined
+  const identity = by(current)
+  if (identity === target) return current
+  if (greather(current))
+    return _binarySearch(arr, target, by, greather, start, index - 1)
+  else return _binarySearch(arr, target, by, greather, index + 1, end)
 }
 
+const _Identity = current => current
+const _BinaryIdentity = (a, b) => a === b
 const _isEqual = (a, b) => {
   if (a === b) return true
   if (a && b && typeof a == 'object' && typeof b == 'object') {
@@ -1347,16 +1285,3 @@ const _isEqual = (a, b) => {
   // true if both NaN, false otherwise
   return a !== a && b !== b
 }
-
-class _Shadow {
-  isShortCircuited() {
-    return true
-  }
-}
-for (const method of Brrr.from([
-  ...Object.getOwnPropertyNames(Brrr),
-  ...Object.getOwnPropertyNames(Brrr.prototype),
-]).without('prototype', 'isShortCircuited', 'constructor').items) {
-  _Shadow.prototype[method] = () => _shadow
-}
-const _shadow = Object.freeze(new _Shadow())

@@ -217,11 +217,12 @@ describe('Brrr extra features', () => {
     const group = new Brrr()
       .with(1, 2, 3, 4, 4, 5, 8, 9, 1, 2, 32, 222, 2)
       .group(item => (item % 2 == 0 ? 'even' : 'odd'))
-      .map(item => item.items)
-    expect(group.items).toEqual({
-      odd: [1, 3, 5, 9, 1],
-      even: [2, 4, 4, 8, 2, 32, 222, 2],
-    })
+    expect(group).toEqual(
+      new Map([
+        ['odd', Brrr.from([1, 3, 5, 9, 1])],
+        ['even', Brrr.from([2, 4, 4, 8, 2, 32, 222, 2])],
+      ])
+    )
   })
 
   it('.isSorted should work', () => {
@@ -497,37 +498,6 @@ describe('Brrr extra features', () => {
       )
     ).toBe(false)
   })
-  it('.shortCircuit should work', () => {
-    expect(
-      of(1, 2, 3, 4)
-        .shortCircuitUnless(self => self.isEmpty())
-        .map(x => x ** 2)
-        .filter(x => x % 2)
-        .isShortCircuited()
-    ).toBe(true)
-
-    expect(
-      of()
-        .shortCircuitIf(self => self.isEmpty())
-        .map(x => x ** 2)
-        .filter(x => x % 2)
-        .isShortCircuited()
-    ).toBe(true)
-
-    expect(
-      of(1, 2, 3, 4)
-        .shortCircuitIf(self => self.isEmpty())
-        .map(x => x ** 2)
-        .filter(x => x % 2).items
-    ).toEqual([1, 9])
-    expect(
-      of()
-        .shortCircuitIf(self => self.isEmpty())
-        .map(x => x ** 2)
-        .filter(x => x % 2).constructor.name
-    ).toBe('_Shadow')
-  })
-
   it(`.do should work`, () => {
     expect(of(1, 2, 3, 4).do(array => array.append(10)).items).toEqual([
       1, 2, 3, 4, 10,
