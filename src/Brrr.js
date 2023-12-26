@@ -108,7 +108,7 @@ export default class Brrr {
     }
   }
 
-  [Symbol.iterator] = function* () {
+  *[Symbol.iterator]() {
     for (let i = 0, len = this.length; i < len; ++i) yield this.get(i)
   }
 
