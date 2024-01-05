@@ -660,6 +660,23 @@ export default class Brrr {
     }
     return this
   }
+  takeFrom(index, amount) {
+    const out = []
+    if (this.length - 1 <= index) return this.head()
+    const len = this.length - index
+    amount = Math.min(len, amount)
+    const isCloserToTheRight = this.offsetLeft + index > 0
+    if (isCloserToTheRight) {
+      this.rotateRight(len)
+      for (let i = 0; i < amount; ++i) out.push(this.cut())
+      for (let i = 0; i < len; ++i) this.append(this.chop())
+    } else {
+      this.rotateLeft(index)
+      for (let i = 0; i < amount; ++i) out.push(this.chop())
+      for (let i = 0; i < index; ++i) this.prepend(this.cut())
+    }
+    return Brrr.from(out)
+  }
   /**
    * Convert to JavaScript Array
    * by default only converts on the first level

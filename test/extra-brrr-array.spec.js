@@ -135,7 +135,12 @@ describe('Brrr extra features', () => {
     expect(arr.offsetLeft * -1).toEqual(arr.offsetRight)
     expect(arr.length).toBe(18)
   })
-
+  it('.takeFrom should work', () => {
+    const arr = Brrr.of(0, 1, 2, 3, 4, 5, 6, 7, 8)
+    const items = arr.takeFrom(3, 4)
+    expect(items.items).toEqual([3, 4, 5, 6])
+    expect(arr.items).toEqual([0, 1, 2, 7, 8])
+  })
   it('.removeFrom and .addAt should work', () => {
     expect(
       new Brrr().with(-2, -1, 0, 1, 2, 3, 4, 5, 2, 3, 4, 5).removeFrom(0, 0)
