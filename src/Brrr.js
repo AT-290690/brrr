@@ -1121,8 +1121,8 @@ const _toMatrix = (...args) => {
   return arr
 }
 
-const _toArrayDeep = entity => {
-  return Brrr.isBrrr(entity)
+const _toArrayDeep = entity =>
+  Brrr.isBrrr(entity)
     ? entity
         .map(item =>
           Brrr.isBrrr(item)
@@ -1133,10 +1133,9 @@ const _toArrayDeep = entity => {
         )
         .toArray()
     : entity
-}
 
-const _toObjectDeep = entity => {
-  return Brrr.isBrrr(entity)
+const _toObjectDeep = entity =>
+  Brrr.isBrrr(entity)
     ? entity
         .map(item =>
           Brrr.isBrrr(item)
@@ -1147,15 +1146,12 @@ const _toObjectDeep = entity => {
         )
         .toObject()
     : entity
-}
 const _toShapeDeep = (entity, out = []) => {
-  if (Brrr.isBrrr(entity.get(0))) {
+  if (Brrr.isBrrr(entity.get(0)))
     entity.forEach(item => {
       out.push(_toShapeDeep(item))
     })
-  } else {
-    out = [entity.length]
-  }
+  else out = [entity.length]
   return out
 }
 
